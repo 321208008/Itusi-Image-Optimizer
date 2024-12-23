@@ -2,7 +2,6 @@ declare module 'cos-nodejs-sdk-v5' {
   interface COSOptions {
     SecretId: string;
     SecretKey: string;
-    UseAccelerate?: boolean;
     Protocol?: string;
   }
 
@@ -10,7 +9,7 @@ declare module 'cos-nodejs-sdk-v5' {
     Bucket: string;
     Region: string;
     Key: string;
-    Body: Buffer;
+    Body: Buffer | string;
     ContentType?: string;
   }
 
@@ -20,18 +19,23 @@ declare module 'cos-nodejs-sdk-v5' {
     Key: string;
   }
 
-  interface COSResponse {
-    ContentLength?: number;
-    ContentType?: string;
-    LastModified?: string;
+  interface COSResult {
+    statusCode: number;
+    headers: {
+      [key: string]: string;
+    };
   }
-
-  type Callback = (err: Error | null, data: COSResponse) => void;
 
   class COS {
     constructor(options: COSOptions);
-    putObject(params: PutObjectParams, callback: Callback): void;
-    headObject(params: HeadObjectParams, callback: Callback): void;
+    putObject(
+      params: PutObjectParams,
+      callback: (err: Error | null, data: COSResult) => void
+    ): void;
+    headObject(
+      params: HeadObjectParams,
+      callback: (err: Error | null, data: COSResult) => void
+    ): void;
   }
 
   export = COS;

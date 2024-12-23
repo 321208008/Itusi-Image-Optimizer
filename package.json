@@ -72,7 +72,6 @@
     "zustand": "^4.5.2"
   },
   "devDependencies": {
-    "@types/cos-nodejs-sdk-v5": "^2.12.9",
     "buffer": "^6.0.3",
     "crypto-browserify": "^3.12.1",
     "stream-browserify": "^3.0.0",
